@@ -1,7 +1,7 @@
 help:
 	echo "help "
 chmod:
-	@docker exec -i new.php bash -c "chmod 777 -R storage/ database/ app/ resources/ public/ vendor/"
+	@docker exec -i new.php bash -c "chmod 777 -R  app/ storage/"
 art:
 	@docker exec -i new.php php artisan $(c)
 	@make chmod
