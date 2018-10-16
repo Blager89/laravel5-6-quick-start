@@ -9,6 +9,7 @@ Route::group(['middleware' => ['cors']], function () {
 Route::group(['prefix' => 'auth', 'middleware' => 'jwt.auth'], function () {
     Route::get('user', 'AuthController@user');
     Route::post('logout', 'AuthController@logout');
+    Route::post('/reset/password/email', 'AuthController@resetPasswordEmail');
 });
 
 
@@ -17,3 +18,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');
+
+
+
+

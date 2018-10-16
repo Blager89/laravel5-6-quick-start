@@ -21,6 +21,13 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:3',
         ],
+        'login' => [
+            'email' => 'required|max:64|email',
+            'password' => 'required|min:3',
+        ],
+        'forgot_password' => [
+            'email' => 'required|email|exists:users,email',
+        ],
     ];
 
     /**
@@ -78,6 +85,17 @@ class AuthController extends Controller
             'status' => 'success',
             'data' => $user
         ]);
+    }
+
+    public function resetPasswordEmail(Request $request)
+    {
+        if (!$this->validateRequest($request->all(), self::$validation_rules['forgot_password'])) {
+            return $this->responseError();
+        }
+        $user = User::where('email', $request->only('email'))->firstOrFail();
+
+        $user->sendNewPasswordNotification($user->resetPassword());
+        return Response::json($this->response);
     }
 
 
