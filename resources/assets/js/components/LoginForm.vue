@@ -39,6 +39,9 @@
               class="auth-button btn btn-default w-100"
           >Submit
           </button>
+          <div class="link-button pt-4 d-block text-center">
+            <router-link to="/signup">registration</router-link>
+          </div>
         </form>
       </div>
     </div>
@@ -69,5 +72,4 @@
 </script>
 
 <style scoped>
-
 </style>

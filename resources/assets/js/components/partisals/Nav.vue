@@ -8,10 +8,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item" @click="isActive = 1" :class="{active : isActive == 1}">
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" @click="isActive = 2" :class="{active : isActive == 2}">
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
         </ul>
@@ -38,6 +38,7 @@
     name: "Nav",
     data() {
       return {
+        isActive: 1,
         userInfo: {},
       }
     },
@@ -74,7 +75,7 @@
 </script>
 
 <style scoped>
-.p-navbar{
-  margin-bottom: 10px;
-}
+  .p-navbar {
+    margin-bottom: 10px;
+  }
 </style>

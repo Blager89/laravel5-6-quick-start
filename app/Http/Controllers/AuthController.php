@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -80,13 +80,6 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     */
-    public function logout(Request $request)
-    {
-
-    }
 
     public function refresh()
     {

@@ -2,7 +2,6 @@
   <div class="p-about">
     <div class="card card-default">
       <div class="card-header">about</div>
-
       <div class="card-body">
         about
       </div>
@@ -12,7 +11,7 @@
 
 <script>
   export default {
-    name: "About"
+    name: "About",
   }
 </script>
 
