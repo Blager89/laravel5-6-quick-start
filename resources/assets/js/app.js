@@ -18,12 +18,16 @@ Vue.component('login', require('./components/pages/auth/Login.vue'));
 Vue.component('signup', require('./components/pages/auth/Signup.vue'));
 Vue.component('login-form', require('./components/LoginForm.vue'));
 Vue.component('reg-form', require('./components/RegForm.vue'));
+Vue.component('reset-email-form', require('./components/ResetEmailForm.vue'));
+Vue.component('reset-password-form', require('./components/ResetPasswordForm.vue'));
 Vue.component('alert-error', require('./components/AlertError.vue'));
 
 let Home = require('./components/pages/Home.vue');
 let About = require('./components/pages/About.vue');
 let Login = require('./components/pages/auth/Login.vue');
 let Signup = require('./components/pages/auth/Signup.vue');
+let ResetEmailPassword = require('./components/pages/auth/ResetPasswordEmail.vue');
+let ResetPassword = require('./components/pages/auth/ResetPassword.vue');
 
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
@@ -34,6 +38,8 @@ const router = new VueRouter({
     {path: '/about', component: About},
     {path: '/login', component: Login},
     {path: '/signup', component: Signup},
+    {path: '/reset/email', component: ResetEmailPassword},
+    {path: '/reset/password', component: ResetPassword},
   ]
 });
 

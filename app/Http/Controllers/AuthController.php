@@ -28,11 +28,14 @@ class AuthController extends Controller
         'forgot_password' => [
             'email' => 'required|email|exists:users,email',
         ],
+        'new_password' => [
+            'password' => 'required|min:3',
+        ],
     ];
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function signup(Request $request)
     {
@@ -69,14 +72,12 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
         return response()->json(compact('token'));
     }
 
-
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function user(Request $request)
     {
@@ -87,6 +88,10 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function resetPasswordEmail(Request $request)
     {
         if (!$this->validateRequest($request->all(), self::$validation_rules['forgot_password'])) {
@@ -98,7 +103,26 @@ class AuthController extends Controller
         return Response::json($this->response);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function newPassword(Request $request)
+    {
 
+        if (!$this->validateRequest($request->all(), self::$validation_rules['new_password'])) {
+            return $this->responseError();
+        }
+
+        $user = User::find(Auth::user()->id);
+        $user->resetPassword($request->password);
+        return Response::json($this->response);
+
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function refresh()
     {
         return response([

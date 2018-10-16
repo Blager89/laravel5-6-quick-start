@@ -1,8 +1,11 @@
 <template>
   <div class="p-login">
-    <alert-error v-bind:errorMessage="errorMessage"></alert-error>
+    <alert-error
+        v-bind:errorMessage="errorMessage"
+        v-bind:error="error"
+    ></alert-error>
     <div class="row justify-content-center">
-      <div class=" col-sm-12 col-md-6 col-lg-6">
+      <div class=" col-sm-12 col-md-8 col-lg-6">
         <login-form
             v-on:login="login($event)"
         ></login-form>
@@ -18,7 +21,8 @@
     name: "Login",
     data() {
       return {
-        errorMessage: ''
+        errorMessage: '',
+        error: ''
       }
     },
     methods: {
@@ -38,13 +42,21 @@
           }
         }).catch(err => {
           if (err.response.status === 401) {
-            this.errorMessage = 'Invalid credentials';
-            setTimeout(() => {
-              this.errorMessage = '';
-            }, 3000);
+            this.alertMessage('Invalid credentials', 'true');
+          } else {
+            this.alertMessage('something wrong', 'true');
+
           }
         });
       },
+      alertMessage(data, error = null) {
+        this.errorMessage = data;
+        this.error = error;
+        setTimeout(() => {
+          this.errorMessage = '';
+          this.error = '';
+        }, 3000);
+      }
     }
   }
 </script>

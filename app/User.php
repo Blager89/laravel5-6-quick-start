@@ -16,7 +16,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email','password'
+        'name', 'email', 'password'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -42,9 +42,11 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return string
      */
-    public function resetPassword()
+    public function resetPassword($new_password = null)
     {
-        $new_password = str_random(8);
+        if (!$new_password) {
+            $new_password = str_random(8);
+        }
         $this->update([
             'password' => bcrypt($new_password),
         ]);
@@ -55,6 +57,5 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->notify(new NewPassword($new_password));
     }
-
 
 }

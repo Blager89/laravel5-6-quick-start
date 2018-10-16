@@ -1,7 +1,7 @@
 <template>
-  <div class="p-login-form">
+  <div class="p-reset-password-email">
     <div class="card card-default">
-      <div class="card-header text-center ">Login</div>
+      <div class="card-header text-center ">Reset password</div>
       <div class="card-body">
         <form @submit.prevent=validateBeforeSubmit>
           <div class="form-group">
@@ -19,34 +19,11 @@
             >
             <small class="text-danger">{{ errors.first('email') }}</small>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-                v-validate="'required|min:3'"
-                :class="{ 'border-danger text-danger' : errors.first('password')}"
-                v-model="data.password"
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                aria-describedby="passwordHelp"
-                placeholder="Enter password"
-            >
-            <small class="text-danger">{{ errors.first('password') }}</small>
-          </div>
           <button
               type="submit"
               class="auth-button btn btn-default w-100"
-          >Sign in
+          >Send
           </button>
-          <div class="row text-center mt-4 link-button ">
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <router-link to="/signup">registration</router-link>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <router-link to="/reset/email">forgot password</router-link>
-            </div>
-          </div>
         </form>
       </div>
     </div>
@@ -55,7 +32,7 @@
 
 <script>
   export default {
-    name: "Form",
+    name: "ResetPasswordEmail",
     data() {
       return {
         data: {},
@@ -65,8 +42,7 @@
       validateBeforeSubmit(e) {
         this.$validator.validateAll().then((result) => {
           if (result) {
-            this.$emit('login', this.data);
-            return
+            return this.$emit('reset', this.data);
           }
         }).catch(() => {
           return false
@@ -77,4 +53,5 @@
 </script>
 
 <style scoped>
+
 </style>

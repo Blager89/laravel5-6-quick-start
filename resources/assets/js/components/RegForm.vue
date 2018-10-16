@@ -52,7 +52,7 @@
           <button
               type="submit"
               class="auth-button btn btn-default w-100"
-          >Submit
+          >Create account
           </button>
         </form>
       </div>

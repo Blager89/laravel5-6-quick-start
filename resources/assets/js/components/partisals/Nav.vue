@@ -20,8 +20,9 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">{{ userInfo.name ? userInfo.name : 'sign in' }}</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <router-link to="/signup" class="dropdown-item" v-if="!getToken()">Signup</router-link>
+              <router-link to="/signup" class="dropdown-item" v-if="!getToken()">Sign up</router-link>
               <router-link to="/login" class="dropdown-item" v-if="!getToken()">Login</router-link>
+              <router-link to="/reset/password" class="dropdown-item" v-if="getToken()">Change password</router-link>
               <a class="dropdown-item" href="#" @click="logout()" v-if="getToken()">Logout</a>
             </div>
           </li>

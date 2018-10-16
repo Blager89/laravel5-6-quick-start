@@ -1,24 +1,24 @@
 <template>
-  <div class="p-signup">
+  <div class="p-reset-email-form">
     <alert-error
         v-bind:errorMessage="errorMessage"
         v-bind:error="error"
     ></alert-error>
     <div class="row justify-content-center">
       <div class=" col-sm-12 col-md-8 col-lg-6">
-        <reg-form
-            v-on:signup="signup($event)"
-        ></reg-form>
+        <reset-password-form
+            v-on:changePassword="changePassword($event)"
+        ></reset-password-form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from 'axios';
 
   export default {
-    name: "Signup",
+    name: "ResetPasswordEmail",
     data() {
       return {
         errorMessage: '',
@@ -26,20 +26,20 @@
       }
     },
     methods: {
-      signup(data) {
+      changePassword(data) {
         axios({
           method: 'post',
-          url: '/api/signup',
+          url: '/api/auth/reset/password',
           data: {
-            name: data.name,
-            email: data.email,
-            password: data.password
+            password: data.password,
+            token: localStorage.getItem('authorization')
           }
         }).then(res => {
           if (!res.data.error) {
-            this.$router.push('/login');
+            this.alertMessage(res.data.response_text, res.data.error);
+          } else {
+            this.alertMessage(res.data.response_text, res.data.error)
           }
-          this.alertMessage(res.data.response_text, res.data.error);
         });
       },
       alertMessage(data, error = null) {
@@ -56,7 +56,7 @@
 </script>
 
 <style scoped>
-  .p-signup {
+  .p-reset-email-form {
     margin: 10% 10%;
   }
 </style>
