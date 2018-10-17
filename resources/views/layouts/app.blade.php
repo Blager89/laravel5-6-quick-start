@@ -20,7 +20,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <router-view></router-view>
+                {{--<router-view></router-view>--}}
+                <api></api>
                 @yield('content')
             </div>
         </div>
